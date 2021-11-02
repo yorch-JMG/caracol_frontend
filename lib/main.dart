@@ -1,4 +1,3 @@
-import 'package:caracol_frontend/home_page.dart';
 import 'package:caracol_frontend/login_page.dart';
 import 'package:flutter/material.dart';
 

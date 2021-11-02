@@ -1,5 +1,5 @@
 import 'package:caracol_frontend/constants/login_page_consts.dart';
-import 'package:caracol_frontend/register_page.dart';
+import 'package:caracol_frontend/home_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -96,12 +96,12 @@ class _LoginPageState extends State<LoginPage> {
                             child: TextButton(
                                 child: Text(loginPageProps.textButtonText),
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterPage()));
-                                },
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
+                                      }
+                              ),
                             ),
                                   
-                        ) 
-                    )
+                        ), 
                 ],
             ),
         ),
