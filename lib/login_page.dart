@@ -1,3 +1,4 @@
+import 'package:caracol_frontend/constants/login_page_consts.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -7,10 +8,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final double verticalSpacing = 20;
-  final double titleFontSize = 32;
-  final String emailHintText = "Correo electronico"; 
-  final String passwordHintText = "Contrasena"; 
+
+  final LoginPageConsts loginPageProps =  LoginPageConsts();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,10 +23,10 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text(
                         'Log in', 
-                        style: TextStyle(fontSize: titleFontSize),
+                        style: TextStyle(fontSize: loginPageProps.titleFontSize),
                     ),
                     SizedBox(
-                        height: verticalSpacing,
+                        height: loginPageProps.verticalSpacing,
                     ),
                     Container(
                         height: 250,
@@ -46,25 +46,25 @@ class _LoginPageState extends State<LoginPage> {
                                                 padding: const EdgeInsets.all(15),
                                                 child: TextField(
                                                         decoration: InputDecoration(
-                                                        hintText: emailHintText,
+                                                        hintText: loginPageProps.emailHintText,
                                                         ),
                                                       ),
                                                 ),
                                             
                                             SizedBox(
-                                              height: verticalSpacing,
+                                              height: loginPageProps.verticalSpacing,
                                             ),
 
                                             Padding(
                                                 padding: const EdgeInsets.all(15),
                                                 child: TextField(
                                                 decoration: InputDecoration(
-                                                hintText: passwordHintText,
+                                                hintText: loginPageProps.passwordHintText,
                                                 ),
                                               ),
                                             ),
                                             SizedBox(
-                                              height: verticalSpacing,
+                                              height: loginPageProps.verticalSpacing,
                                             ),
 
                                           ],
@@ -79,13 +79,13 @@ class _LoginPageState extends State<LoginPage> {
                           height: 50,
                           width: MediaQuery.of(context).size.width,
                           child: ElevatedButton(
-                            child: Text('Sign in'),
+                              child: Text(loginPageProps.buttonText),
                             onPressed: () {},
                         ),
                       ),
                     ),
                     SizedBox(
-                        height: verticalSpacing,
+                        height: loginPageProps.verticalSpacing,
                     ),
                     Padding(
                         padding: const EdgeInsets.all(5),
@@ -93,8 +93,10 @@ class _LoginPageState extends State<LoginPage> {
                             height: 50,
                             width: MediaQuery.of(context).size.width,
                             child: TextButton(
-                                child: Text('Registrate'),
-                                onPressed: () {},
+                                child: Text(loginPageProps.textButtonText),
+                                onPressed: () {
+
+                                },
                             ),
                                   
                         ) 
