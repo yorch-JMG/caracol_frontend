@@ -12,7 +12,11 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
 
   final LoginPageConsts loginPageProps =  LoginPageConsts();
-  
+  final _correoElectronico = TextEditingController();
+  final _contrasena = TextEditingController();
+  bool _validate_correo = false;
+  bool _validate_contra = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,14 +35,14 @@ class _LoginPageState extends State<LoginPage> {
                         height: loginPageProps.verticalSpacing,
                     ),
                     Container(
-                        height: 250,
+                        height: 280,
                         width: MediaQuery.of(context).size.width,
                         padding: const EdgeInsets.all(0),
                         child: Padding(
                             padding: const EdgeInsets.all(20),
                             child: Card(
                                 child: Container(
-                                    height: 200,
+                                    height: 270,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: 
                                       BoxDecoration(borderRadius: BorderRadius.circular(20)),
@@ -47,28 +51,29 @@ class _LoginPageState extends State<LoginPage> {
                                             Padding(
                                                 padding: const EdgeInsets.all(15),
                                                 child: TextField(
+                                                        controller: _correoElectronico,
                                                         decoration: InputDecoration(
-                                                        hintText: loginPageProps.emailHintText,
+                                                          hintText: loginPageProps.emailHintText,
+                                                          errorText: _validate_correo ? "Ingresa un correo electronico valido." : null
                                                         ),
                                                       ),
                                                 ),
-                                            
                                             SizedBox(
-                                              height: loginPageProps.verticalSpacing,
+                                              height: loginPageProps.centerVerticalSpacing,
                                             ),
-
                                             Padding(
                                                 padding: const EdgeInsets.all(15),
                                                 child: TextField(
+                                                controller: _contrasena,
                                                 decoration: InputDecoration(
-                                                hintText: loginPageProps.passwordHintText,
+                                                  hintText: loginPageProps.passwordHintText,
+                                                  errorText: _validate_contra ? "Ingresa tu contrasena." : null
                                                 ),
                                               ),
                                             ),
                                             SizedBox(
                                               height: loginPageProps.verticalSpacing,
                                             ),
-
                                           ],
                                       ),
                                 ),
@@ -82,7 +87,10 @@ class _LoginPageState extends State<LoginPage> {
                           width: MediaQuery.of(context).size.width,
                           child: ElevatedButton(
                               child: Text(loginPageProps.buttonText),
-                            onPressed: () {},
+                              onPressed: () {
+                                    _correoElectronico.text.isEmpty ? _validate_correo = true : _validate_correo = false;
+                                    _contrasena.text.isEmpty ? _validate_contra = true : _validate_contra = false;
+                              },
                         ),
                       ),
                     ),

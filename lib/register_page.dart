@@ -3,126 +3,193 @@ import 'package:caracol_frontend/login_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatelessWidget {
-  final RegisterPageConsts registerPageProps = RegisterPageConsts();
+
+
+class RegisterPage extends StatefulWidget {
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
-            child: Container(
-                padding: EdgeInsets.fromLTRB(20, 100, 20, 25),
-                child: Column (
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                        'Log in', 
-                        style: TextStyle(fontSize: registerPageProps.titleFontSize),
-                    ),
-                    SizedBox(
-                        height: registerPageProps.verticalSpacing,
-                    ),
-                    Container(
-                        height: 250,
-                        width: MediaQuery.of(context).size.width,
-                        padding: const EdgeInsets.all(0),
-                        child: Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Card(
-                                child: Container(
-                                    height: 400,
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: 
-                                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                                      child: Column(
-                                          children: [
-                                            Padding(
-                                                padding: const EdgeInsets.all(15),
-                                                child: TextField(
-                                                        decoration: InputDecoration(
-                                                        hintText: registerPageProps.emailHintText,
-                                                        ),
-                                                      ),
-                                                ),
-                                            
-                                            SizedBox(
-                                              height: registerPageProps.verticalSpacing,
-                                            ),
+  _RegisterPageState createState() => _RegisterPageState();
 
-                                            Padding(
-                                                padding: const EdgeInsets.all(15),
-                                                child: TextField(
-                                                decoration: InputDecoration(
-                                                hintText: registerPageProps.passwordHintText,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                                padding: const EdgeInsets.all(15),
-                                                child: TextField(
-                                                decoration: InputDecoration(
-                                                hintText: registerPageProps.puestoHintText,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                                padding: const EdgeInsets.all(15),
-                                                child: TextField(
-                                                decoration: InputDecoration(
-                                                hintText: registerPageProps.departamentoHintText,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                                padding: const EdgeInsets.all(15),
-                                                child: TextField(
-                                                decoration: InputDecoration(
-                                                hintText: registerPageProps.telefonoHintText,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: registerPageProps.verticalSpacing,
-                                            ),
+}
 
-                                          ],
-                                      ),
-                                ),
-                                ),
-                        ), 
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.all(25),
-                        child: SizedBox(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width,
-                          child: ElevatedButton(
-                              child: Text(registerPageProps.buttonText),
-                            onPressed: () {},
-                        ),
+  class _RegisterPageState extends State<RegisterPage> {
+    final RegisterPageConsts registerPageProps = RegisterPageConsts();
+    final _nombre = TextEditingController();
+    final _correoElectronico = TextEditingController();
+    final _contrasena = TextEditingController();
+    final _puesto = TextEditingController();
+    final _departamento = TextEditingController();
+    final _telefono = TextEditingController();
+    bool _validate_nombre = false;
+    bool _validate_correo = false;
+    bool _validate_contra = false;
+    bool _validate_puesto = false;
+    bool _validate_departamento = false;
+    bool _validate_telefono = false;
+    final _formKey = GlobalKey<FormState>();
+    Future save() async {
+    }
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+          body: SingleChildScrollView(
+              child: Container(
+                  padding: EdgeInsets.fromLTRB(20, 100, 20, 25),
+                  child: Column (
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                          'Registrate', 
+                          style: TextStyle(fontSize: registerPageProps.titleFontSize),
                       ),
-                    ),
-                    SizedBox(
-                        height: registerPageProps.verticalSpacing,
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: SizedBox(
+                      SizedBox(
+                          height: registerPageProps.verticalSpacing,
+                      ),
+                      Container(
+                          height: 780,
+                          width: MediaQuery.of(context).size.width,
+                          padding: const EdgeInsets.all(0),
+                          child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Form(
+                                key: _formKey,
+                                child: Card(
+                                  child: Container(
+                                      height: 400,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: 
+                                        BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                                        child: Column(
+                                            children: [
+                                              Padding(
+                                                  padding: const EdgeInsets.all(15),
+                                                  child: TextField(
+                                                          controller: _nombre,
+                                                          decoration: InputDecoration(
+                                                            hintText: registerPageProps.nameHintText,
+                                                            errorText: _validate_nombre ? "Este campo es obligatorio." : null
+                                                          ),
+                                                          
+                                                        ),
+                                                        
+                                                  ),
+                                              SizedBox(
+                                                  height: registerPageProps.verticalSpacing,
+                                              ),
+                                              Padding(
+                                                  padding: const EdgeInsets.all(15),
+                                                  child: TextField(
+                                                          controller: _correoElectronico,
+                                                          decoration: InputDecoration(
+                                                            hintText: registerPageProps.emailHintText,
+                                                            errorText: _validate_correo  ? "Este campo es obligatorio." : null
+                                                          ),
+                                                        ),
+                                                  ),
+                                              SizedBox(
+                                                  height: registerPageProps.verticalSpacing,
+                                              ),
+                                              Padding(
+                                                  padding: const EdgeInsets.all(15),
+                                                  child: TextField(
+                                                          controller: _contrasena,
+                                                          decoration: InputDecoration(
+                                                            hintText: registerPageProps.passwordHintText,
+                                                            errorText: _validate_contra ? "Este campo es obligatorio." : null
+                                                            ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  height: registerPageProps.verticalSpacing,
+                                              ),
+                                              Padding(
+                                                  padding: const EdgeInsets.all(15),
+                                                  child: TextField(
+                                                          controller: _puesto,
+                                                          decoration: InputDecoration(
+                                                            hintText: registerPageProps.puestoHintText,
+                                                            errorText: _validate_puesto ? "Este campo es obligatorio." : null
+                                                            ),
+                                                  ),
+                                              ),
+                                              SizedBox(
+                                                  height: registerPageProps.verticalSpacing,
+                                              ),
+                                              Padding(
+                                                  padding: const EdgeInsets.all(15),
+                                                  child: TextField(
+                                                          controller: _departamento,
+                                                          decoration: InputDecoration(
+                                                            hintText: registerPageProps.departamentoHintText,
+                                                            errorText: _validate_departamento ? "Este campo es obligatorio." : null
+                                                            ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  height: registerPageProps.verticalSpacing,
+                                              ),
+                                              Padding(
+                                                  padding: const EdgeInsets.all(15),
+                                                  child: TextField(
+                                                          controller: _telefono,
+                                                          decoration: InputDecoration(
+                                                            hintText: registerPageProps.telefonoHintText,
+                                                            errorText: _validate_telefono ? "Este campo es obligatorio." : null
+                                                            ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  height: registerPageProps.verticalSpacing,
+                                              ),
+                                            ],
+                                        ),
+                                  ),
+                                  ),
+                                ),
+                              ), 
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.all(25),
+                          child: SizedBox(
                             height: 50,
                             width: MediaQuery.of(context).size.width,
-                            child: TextButton(
-                                child: Text(registerPageProps.textButtonText),
+                            child: ElevatedButton(
+                                child: Text(registerPageProps.buttonText),
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage()));
-                                      }
+                                  setState(() {
+                                    _nombre.text.isEmpty ? _validate_nombre = true : _validate_nombre = false;
+                                    _correoElectronico.text.isEmpty ? _validate_correo = true : _validate_correo = false;
+                                    _contrasena.text.isEmpty ? _validate_contra = true : _validate_contra = false;
+                                    _puesto.text.isEmpty ? _validate_puesto = true : _validate_puesto = false;
+                                    _departamento.text.isEmpty ? _validate_departamento = true : _validate_departamento = false;
+                                    _telefono.text.isEmpty ? _validate_telefono = true : _validate_telefono = false;
+                                  });
+                                },
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                          height: registerPageProps.verticalSpacing,
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: SizedBox(
+                              height: 50,
+                              width: MediaQuery.of(context).size.width,
+                              child: TextButton(
+                                  child: Text(registerPageProps.textButtonText),
+                                  onPressed: () {
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage()));
+                                        }
+                                ),
                               ),
-                            ),
-                                  
-                        ), 
-                ],
-            ),
-        ),
-    )
-  );
+                                    
+                          ), 
+                  ],
+              ),
+          ),
+      )
+    );
   }
 }

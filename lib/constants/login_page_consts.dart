@@ -3,7 +3,8 @@ class LoginPageConsts {
   String passwordHintText = 'Contrasena';
   String buttonText = 'Sign in';
   String textButtonText = "Registrate";
-  double verticalSpacing = 20;
+  double verticalSpacing = 10;
+  double centerVerticalSpacing = 5;
   double titleFontSize = 32;
     
   String get getEmailHintText {
@@ -17,6 +18,9 @@ class LoginPageConsts {
   }
   String get getTextButtonText {
     return textButtonText;
+  }
+  double get getCenterVerticalSpacing {
+    return centerVerticalSpacing;
   }
   double get getVerticalSpacing {
     return verticalSpacing;

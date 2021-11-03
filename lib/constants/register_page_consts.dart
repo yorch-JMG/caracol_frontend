@@ -1,5 +1,6 @@
 
 class RegisterPageConsts {
+  String nameHintText = 'Nombre';
   String emailHintText = 'Correo electronico';
   String passwordHintText = 'Contrasena';
   String puestoHintText = 'Puesto';
@@ -10,6 +11,9 @@ class RegisterPageConsts {
   double verticalSpacing = 20;
   double titleFontSize = 32;
     
+  String get getNameHintText {
+    return nameHintText;
+  }
   String get getEmailHintText {
     return emailHintText;
   }
