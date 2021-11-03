@@ -35,16 +35,17 @@ class RegisterPage extends StatefulWidget {
     final _formKey = GlobalKey<FormState>();
 
     void register() async {
-      var uri = "http://localhost:3000/api/users/create";
-      final res = await http.post(Uri.parse(uri), body: {
+      var uri = "http://10.0.2.2:3000/api/users/create";
+      http.Response response = await http.post(Uri.parse(uri), body: {
         "nombre": _nombre.text,
-        "correoElectronico" : _correoElectronico.text,
+        "contrasena": _contrasena.text,
         "puesto": _puesto.text,
         "departamento": _departamento.text,
+        "correoElectronico" : _correoElectronico.text,
         "telefono": _telefono.text
       });
 
-      var dataUser = jsonDecode(res.body);
+      var dataUser = json.decode(response.body);
 
       if(dataUser.length == 0){
         setState(() {
