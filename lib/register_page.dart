@@ -1,7 +1,12 @@
 import 'package:caracol_frontend/constants/register_page_consts.dart';
+import 'package:caracol_frontend/home_page.dart';
+import 'dart:convert';
+import 'dart:async';
 import 'package:caracol_frontend/login_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 
 
 
@@ -20,6 +25,7 @@ class RegisterPage extends StatefulWidget {
     final _puesto = TextEditingController();
     final _departamento = TextEditingController();
     final _telefono = TextEditingController();
+    var _mensaje;
     bool _validate_nombre = false;
     bool _validate_correo = false;
     bool _validate_contra = false;
@@ -27,8 +33,29 @@ class RegisterPage extends StatefulWidget {
     bool _validate_departamento = false;
     bool _validate_telefono = false;
     final _formKey = GlobalKey<FormState>();
-    Future save() async {
+
+    void register() async {
+      var uri = "http://localhost:3000/api/users/create";
+      final res = await http.post(Uri.parse(uri), body: {
+        "nombre": _nombre.text,
+        "correoElectronico" : _correoElectronico.text,
+        "puesto": _puesto.text,
+        "departamento": _departamento.text,
+        "telefono": _telefono.text
+      });
+
+      var dataUser = jsonDecode(res.body);
+
+      if(dataUser.length == 0){
+        setState(() {
+          _mensaje = "Usuario registrado";
+        });
+      }
+      else {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
+      }
     }
+
     @override
     Widget build(BuildContext context) {
       return Scaffold(
@@ -165,6 +192,12 @@ class RegisterPage extends StatefulWidget {
                                     _departamento.text.isEmpty ? _validate_departamento = true : _validate_departamento = false;
                                     _telefono.text.isEmpty ? _validate_telefono = true : _validate_telefono = false;
                                   });
+                                  if(_validate_nombre && _validate_correo && _validate_contra && _validate_puesto && _validate_departamento && _validate_telefono){
+                                    print("Not ready to post.");
+                                  }
+                                  else{
+                                    register(); 
+                                  }
                                 },
                           ),
                         ),
