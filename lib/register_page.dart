@@ -36,7 +36,7 @@ class RegisterPage extends StatefulWidget {
 
     void register() async {
       print(_nombre.text);
-      var uri = "http://192.168.1.69:3000/api/users/create";
+      var uri = "http://192.168.68.113:3000/api/users/create";
       var body = {
         "nombre": _nombre.text,
         "contrasena": _contrasena.text,
@@ -54,11 +54,23 @@ class RegisterPage extends StatefulWidget {
 
       if(dataUser.length == 0){
         setState(() {
-          _mensaje = "Usuario registrado";
+          _mensaje = dataUser;
+          print(_mensaje);
         });
       }
       else {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
+        setState(() {
+          _mensaje = dataUser[0][0].toString();
+          if(_mensaje.contains("agregado")){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
+            print(_mensaje);
+          }
+          else if(_mensaje.contains("existe")){
+            print(_mensaje);
+          }
+          print(_mensaje);
+
+        });
       }
     }
 
