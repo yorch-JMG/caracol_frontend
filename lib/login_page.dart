@@ -3,6 +3,8 @@ import 'package:caracol_frontend/home_page.dart';
 import 'package:caracol_frontend/register_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,8 +16,45 @@ class _LoginPageState extends State<LoginPage> {
   final LoginPageConsts loginPageProps =  LoginPageConsts();
   final _correoElectronico = TextEditingController();
   final _contrasena = TextEditingController();
+  var _mensaje;
   bool _validate_correo = false;
   bool _validate_contra = false;
+    
+  void signIn() async {
+      print(_correoElectronico.text);
+      var uri = "http://192.168.68.113:3000/api/login";
+      var body = {
+        "correoElectronico" : _correoElectronico.text,
+        "contrasena": _contrasena.text,
+      };
+      Map<String, String> requestHeaders = 
+        {'Content-type': 'application/json',
+        'Accept': 'application/json',};
+      http.Response response = await http.post(Uri.parse(uri), body: jsonEncode(body), headers: requestHeaders);
+
+      var dataUser = json.decode(response.body);
+
+      if(dataUser.length == 0){
+        setState(() {
+          _mensaje = dataUser;
+          print(_mensaje);
+        });
+      }
+      else {
+        setState(() {
+          _mensaje = dataUser[0][0].toString();
+          if(_mensaje.contains("incorrecta")){
+            print(_mensaje);
+          }
+          else{
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
+            print(_mensaje);
+          }
+          print(_mensaje);
+
+        });
+      }
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +129,12 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: () {
                                     _correoElectronico.text.isEmpty ? _validate_correo = true : _validate_correo = false;
                                     _contrasena.text.isEmpty ? _validate_contra = true : _validate_contra = false;
+                                    if (_validate_correo && _validate_contra){
+                                      print('not ready to post');
+                                    }
+                                    else{
+                                      signIn();
+                                    }
                               },
                         ),
                       ),
