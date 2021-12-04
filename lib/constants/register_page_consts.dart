@@ -1,13 +1,13 @@
 
 class RegisterPageConsts {
   String nameHintText = 'Nombre';
-  String emailHintText = 'Correo electronico';
-  String passwordHintText = 'Contrasena';
+  String emailHintText = 'Correo electrónico';
+  String passwordHintText = 'Contraseña';
   String puestoHintText = 'Puesto';
   String departamentoHintText = 'Departamento';
-  String telefonoHintText = 'Telefono';
-  String buttonText = 'Registrate';
-  String textButtonText = "Ingresa con tu cuenta.";
+  String telefonoHintText = 'Teléfono';
+  String buttonText = 'Regístrate';
+  String textButtonText = "Ingresa con tu cuenta";
   double verticalSpacing = 20;
   double titleFontSize = 32;
     

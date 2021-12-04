@@ -1,6 +1,6 @@
 class LoginPageConsts {
-  String emailHintText = 'Correo electronico';
-  String passwordHintText = 'Contrasena';
+  String emailHintText = 'Correo electrónico';
+  String passwordHintText = 'Contraseña';
   String buttonText = 'Sign in';
   String textButtonText = "Registrate";
   double verticalSpacing = 10;
