@@ -1,3 +1,5 @@
+import 'package:caracol_frontend/models/empleado.dart';
+import 'package:caracol_frontend/services/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -5,6 +7,11 @@ import 'package:flutter/widgets.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
+}
+
+void getEmpleados() async {
+  var empleados = await Services.getAllEmpleadosList();
+  print(empleados);
 }
 
 class _HomePageState extends State<HomePage> {
@@ -65,7 +72,9 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(height: 00),
                           ElevatedButton(
                             style: style,
-                            onPressed: () {},
+                            onPressed: () {
+                              getEmpleados();
+                            },
                             child: const Text('?'),
                           ),
                         ]
