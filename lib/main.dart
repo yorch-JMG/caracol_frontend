@@ -1,5 +1,5 @@
-import 'package:caracol_frontend/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:caracol_frontend/on_boarding_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: OnBoardingPage(),
     );
   }
 }
