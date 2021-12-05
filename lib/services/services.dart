@@ -3,7 +3,7 @@ import 'package:caracol_frontend/models/visitante.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 class Services {
-  static var ROOT = 'http:ip:3000/api/';
+  static var ROOT = 'http:192.168.1.70:3000/api/';
   static var get_all_users = 'users';
   static var get_user_by_id = 'users/getUserById';
   static var login = 'login';

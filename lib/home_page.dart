@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -9,87 +10,72 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final ButtonStyle style=
+    ElevatedButton.styleFrom(
+        textStyle: const TextStyle(fontSize: 16),
+        fixedSize: const Size(140,50),
+        primary: Colors.blueAccent,
+        shape: RoundedRectangleBorder(
+        borderRadius:  BorderRadius.circular(50)
+    )
+    );
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+      title: ('Museo Caracol'),
+      home: Container(
+        decoration:  BoxDecoration(
+            image:  DecorationImage(
+                image: AssetImage("images/background.jpg"),
+                fit: BoxFit.cover
+            )
         ),
-        home: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('Fondocaracol'),
-              fit: BoxFit.cover
-            ),
-          ),
-          child: Scaffold(
-            backgroundColor: Colors.indigo,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(title: const Text('Museo Caracol'),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+     ),
             body: Container(
-              padding: EdgeInsets.only(
-                  top: 130,
-
-                  bottom: 10,
-                  right: 10,
-                  left: 10
-              ),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT6q20JRkisLTEacLZZyWenViiAe60soW30kisUQhPwOryB2cxQlP7SX0zxj6tlfOJv1M&usqp=CAU"),
-                      alignment: Alignment.topCenter)),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: RaisedButton(
-                              color: Colors.white,
-                              shape: new RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                              onPressed: () {},
-                              child: SizedBox(
-                                width: 100,
-                                height: 100,
-                                child: Center(
-                                  child: Text("OPTION 1",
-                                      textAlign: TextAlign.center),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
+                child:Column(
+                  children: <Widget>[
+                    Image.asset('images/logo.png', width:300),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                      ElevatedButton(
+                        style: style,
+                          onPressed: (){},
+                          child: const Text('Eventos')
                       ),
-                      Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: RaisedButton(
-                              color: Colors.white,
-                              shape: new RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)),
-                              onPressed: () {},
-                              child: SizedBox(
-                                width: 100,
-                                height: 100,
-                                child: Center(
-                                  child: Text("OPTION 2",
-                                      textAlign: TextAlign.center),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
+                      const SizedBox(height: 200),
+                      ElevatedButton(
+                        style: style,
+                        onPressed: () {},
+                        child: const Text('Comprar boletos'),
                       ),
-                    ],
-                  ),
-
+                      ]
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          ElevatedButton(
+                            style: style,
+                              onPressed: (){},
+                              child: const Text('Stats')
+                          ),
+                          const SizedBox(height: 00),
+                          ElevatedButton(
+                            style: style,
+                            onPressed: () {},
+                            child: const Text('?'),
+                          ),
+                        ]
+                    )
                 ],
-              ),
-            ),
-          ),
-        ));
+                ),
+          )
+        ),
+      ),//const MyStatefulWidget()),
+    );
   }
 }
+
