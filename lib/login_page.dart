@@ -1,6 +1,7 @@
 import 'package:caracol_frontend/constants/login_page_consts.dart';
 import 'package:caracol_frontend/home_page.dart';
 import 'package:caracol_frontend/register_page.dart';
+import 'package:caracol_frontend/client_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -155,7 +156,33 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                                   
-                        ), 
+                        ),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: SizedBox(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        child: TextButton(
+                            child: Text('Soy Cliente'),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ClientPage()));
+                            }
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: SizedBox(
+                        height: 250,
+                        width: MediaQuery.of(context).size.width,
+                        child: TextButton(
+                            child: Text('homepage'),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
+                            }
+                        ),
+                      ),
+                    ),
                 ],
             ),
         ),
