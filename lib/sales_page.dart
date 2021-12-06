@@ -69,7 +69,7 @@ List<DatosGrafica> lista = [];
                             return Column(
                                 children: [
                                   Container(
-                                      height: 399,
+                                      height: 400,
                                       child: 
                                 charts.BarChart(series, animate: true,),
                                   ),
