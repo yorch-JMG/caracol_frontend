@@ -1,3 +1,4 @@
+import 'package:caracol_frontend/evento_cliente_page.dart';
 import 'package:caracol_frontend/models/evento.dart';
 import 'package:caracol_frontend/sale_page.dart';
 import 'package:caracol_frontend/services/services.dart';
@@ -56,10 +57,9 @@ class _EventosClientesPageState extends State<EventosClientesPage> {
                                                         splashColor: Colors.blue.withAlpha(30),
                                                         onTap: (){
                                                           print(snapshot.data[index].noEvento);
-                                                          SalePage(data: snapshot.data[index]);
                                                           Navigator.of(context)
                                                               .push(
-                                                                  MaterialPageRoute(builder: (context) => SalePage(data: snapshot.data[index])
+                                                                  MaterialPageRoute(builder: (context) => EventoClientePage(data: snapshot.data[index])
                                                                     ));
                                                               
 

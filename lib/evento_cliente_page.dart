@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class SalePage extends StatelessWidget {
+class EventoClientePage extends StatelessWidget {
   final Evento data;
-  const SalePage({Key? key,
+  const EventoClientePage({Key? key,
                   required this.data,
   }) : super(key: key);
 
