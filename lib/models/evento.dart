@@ -1,5 +1,5 @@
 class Evento {
-  int? noEvento;
+  int noEvento = 0;
   String? nombre;
   String? fecha;
   int? asistentes;
@@ -12,7 +12,6 @@ class Evento {
                     evento['asistentes'] as int, 
                     evento['descripcion'] as String); 
   }
-
   Evento( int noEvento,  String nombre, String fecha, int asistentes , String descripcion)
   {
     this.noEvento = noEvento;
@@ -21,7 +20,7 @@ class Evento {
     this.asistentes = asistentes;
     this.descripcion = descripcion;
   }
-  int? getNoEvento(){
+  int getNoEvento(){
     return noEvento != null ? this.noEvento : 0;
   }
   String? getNombre(){
