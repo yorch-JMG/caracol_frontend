@@ -1,3 +1,4 @@
+import 'package:charts_flutter/flutter.dart' as charts;
 class Ticket {
   String nombreVisitante = "";
   String nombreEvento = "";
