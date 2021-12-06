@@ -206,6 +206,21 @@ class Services {
     return 0;
   }
 
+  static Future<List<dynamic>> getAllEventsList() async {
+    try{
+      var uri = ROOT+get_all_events;
+      final response = await http.get(Uri.parse(uri)); 
+      if(200 == response.statusCode){
+        List<dynamic> lista = jsonDecode(response.body);
+        print(lista);
+        return lista[0];
+      }
+    }
+    catch (e){
+      print(e);
+    }
+    return [];
+  }
 
   static Future<List<dynamic>> getAllEmpleadosList() async {
     try{
