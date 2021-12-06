@@ -1,4 +1,7 @@
 import 'package:caracol_frontend/models/empleado.dart';
+import 'package:caracol_frontend/models/edadPromedio.dart';
+import 'package:caracol_frontend/models/ingresos.dart';
+import 'package:caracol_frontend/models/tipoBoleto.dart';
 import 'package:caracol_frontend/models/visitante.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -123,7 +126,7 @@ class Services {
   }
 
 
-  static Future<int> getAverageAgeByDate( String date) async {
+  static Future<EdadPromedio> getAverageAgeByDate( String date) async {
     try{
       var uri = ROOT+get_average_age_for_date;
       final body = {
@@ -134,24 +137,24 @@ class Services {
         "content-type": "application/json"
       };
       final encodedBody = jsonEncode(body);
-      print(body);
       final response = await http.post(
                                     Uri.parse(uri), 
                                     body : encodedBody,
                                     headers: headers ); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(response);
-        print(lista);
-        return lista[0][0];
+        EdadPromedio edadPromedio = EdadPromedio();
+        edadPromedio.setEdadPromedio(lista[0][0]["edadPromedio"]);
+        print(edadPromedio.edadPromedio);
+        return edadPromedio;
       }
     }
     catch (e){
       print(e);
     }
-    return 0;
+    return EdadPromedio();
   }
-  static Future<String> getMostCommonTicketTypeByDate( String date) async {
+  static Future<TipoBoleto> getMostCommonTicketTypeByDate( String date) async {
     try{
       var uri = ROOT+get_most_common_ticket_type_for_date;
       final body = {
@@ -168,17 +171,17 @@ class Services {
                                     headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(response);
-        print(lista);
-        return lista[0][0];
+        TipoBoleto tipoBoleto = TipoBoleto();
+        tipoBoleto.setDatosTipoBoleto(lista[0][0]["tipoBoletoMasComun"], lista[0][0]["numeroDeBoletos"]);
+        return tipoBoleto;
       }
     }
     catch (e){
       print(e);
     }
-    return "";
+    return TipoBoleto();
   }
-  static Future<int> getIngresosByDate( String date) async {
+  static Future<Ingresos> getIngresosByDate( String date) async {
     try{
       var uri = ROOT+get_ingresos_totales_for_date;
       final body = {
@@ -195,15 +198,15 @@ class Services {
                                     headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(response);
-        print(lista);
-        return lista[0][0];
+        Ingresos ingresos = Ingresos();
+        ingresos.setIngresos(lista[0][0]["ingresos"]);
+        return ingresos;
       }
     }
     catch (e){
       print(e);
     }
-    return 0;
+    return Ingresos();
   }
 
   static Future<List<dynamic>> getAllEventsList() async {
