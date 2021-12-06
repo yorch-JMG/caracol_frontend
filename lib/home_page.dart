@@ -1,4 +1,4 @@
-import 'package:caracol_frontend/models/empleado.dart';
+import 'package:caracol_frontend/eventos_page.dart';
 import 'package:caracol_frontend/services/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +9,9 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-void getEmpleados() async {
-  var empleados = await Services.getAllEmpleadosList();
-  print(empleados);
+void getData() async {
+  var getAllEmpleadosList = await Services.getAllEventsList();
+  print(getAllEmpleadosList);
 }
 
 class _HomePageState extends State<HomePage> {
@@ -50,7 +50,12 @@ class _HomePageState extends State<HomePage> {
                       children: <Widget>[
                       ElevatedButton(
                         style: style,
-                          onPressed: (){},
+                        onPressed: (){
+                            Navigator.of(context)
+                                     .push(
+                                        MaterialPageRoute(builder: (context) => EventosClientesPage())
+                                      );
+                          },
                           child: const Text('Eventos')
                       ),
                       const SizedBox(height: 200),
@@ -73,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                           ElevatedButton(
                             style: style,
                             onPressed: () {
-                              getEmpleados();
+                              getData();
                             },
                             child: const Text('?'),
                           ),
