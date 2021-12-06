@@ -1,5 +1,5 @@
-
 import 'package:caracol_frontend/models/evento.dart';
+import 'package:caracol_frontend/sale_page.dart';
 import 'package:caracol_frontend/services/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,12 +55,19 @@ class _EventosClientesPageState extends State<EventosClientesPage> {
                                                     child: InkWell(
                                                         splashColor: Colors.blue.withAlpha(30),
                                                         onTap: (){
-                                                          print(snapshot.data[index].nombre);
+                                                          print(snapshot.data[index].noEvento);
+                                                          SalePage(data: snapshot.data[index]);
+                                                          Navigator.of(context)
+                                                              .push(
+                                                                  MaterialPageRoute(builder: (context) => SalePage(data: snapshot.data[index])
+                                                                    ));
+                                                              
+
                                                         },
                                                         child: SizedBox(
-                                                            width: 300,
-                                                            height: 399,
-                                                            child: Text(snapshot.data[index].descripcion),
+                                                            width: 200,
+                                                            height: 100,
+                                                            child: Text(snapshot.data[index].nombre),
                                                         ),
                                                     ),
                                                 ); 

@@ -22,18 +22,18 @@ class Evento {
     this.descripcion = descripcion;
   }
   int? getNoEvento(){
-    return noEvento != null ? this.noEvento : null;
+    return noEvento != null ? this.noEvento : 0;
   }
   String? getNombre(){
-    return nombre != null ? this.nombre : null;
+    return nombre != null ? this.nombre : "";
   }
   String? getFecha(){
-    return fecha != null ? this.fecha : null;
+    return fecha != null ? this.fecha : "";
   }
   int? getAsistentes(){
-    return asistentes != null ? this.asistentes : null;
+    return asistentes != null ? this.asistentes : 0;
   }
   String? getDescripcion(){
-    return descripcion != null ? this.descripcion : null;
+    return descripcion != null ? this.descripcion : "";
   }
 }
