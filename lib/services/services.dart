@@ -42,7 +42,7 @@ class Services {
       return lista;
   }
 
-  static Future<int> getAverageAgeByInterval(String beginningDate, String endDate) async {
+  static Future<EdadPromedio> getAverageAgeByInterval(String beginningDate, String endDate) async {
     try{
       var uri = ROOT+get_average_age_for_date;
       final body = {
@@ -60,17 +60,17 @@ class Services {
                                     headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(response);
-        print(lista);
-        return lista[0][0];
+        EdadPromedio edadPromedio = EdadPromedio();
+        edadPromedio.setEdadPromedio(lista[0][0]["edadPromedio"]);
+        return edadPromedio;
       }
     }
     catch (e){
       print(e);
     }
-    return 0;
+    return EdadPromedio();
   }
-  static Future<int> getMostCommonTicketTypeByInterval(  String beginningDate, String endDate) async {
+  static Future<TipoBoleto> getMostCommonTicketTypeByInterval(  String beginningDate, String endDate) async {
     try{
       var uri = ROOT+get_most_common_ticket_type_for_interval;
       final body = {
@@ -88,17 +88,17 @@ class Services {
                                     headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(response);
-        print(lista);
-        return lista[0][0];
+        TipoBoleto tipoBoleto = TipoBoleto();
+        tipoBoleto.setDatosTipoBoleto(lista[0][0]["tipoBoletoMasComun"], lista[0][0]["numeroDeBoletos"]);
+        return tipoBoleto;
       }
     }
     catch (e){
       print(e);
     }
-    return 0;
+    return TipoBoleto();
   }
-  static Future<int> getIngresosByInterval( String beginningDate, String endDate) async {
+  static Future<Ingresos> getIngresosByInterval( String beginningDate, String endDate) async {
     try{
       var uri = ROOT+get_ingresos_totales_for_interval;
       final body = {
@@ -116,15 +116,15 @@ class Services {
                                     headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(response);
-        print(lista);
-        return lista[0][0];
+        Ingresos ingresos = Ingresos();
+        ingresos.setIngresos(lista[0][0]["ingresos"]);
+        return ingresos;
       }
     }
     catch (e){
       print(e);
     }
-    return 0;
+    return Ingresos();
   }
 
 
