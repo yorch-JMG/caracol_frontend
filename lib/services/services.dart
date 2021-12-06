@@ -18,26 +18,26 @@ class Services {
   static var get_most_common_ticket_type_for_interval = 'sales/getMostCommonTicketTypeByInterval';
   static var get_ingresos_totales_for_interval = 'sales/getIngresosByInterval';
 
-  static Future<String> getAllVisitantesList() async {
+  static Future<List<dynamic>> getAllVisitantesList() async {
     try{
       var uri = ROOT+get_all_users;
       final response = await http.get(Uri.parse(uri)); 
       print(response);
       if(200 == response.statusCode){
-        String lista = jsonDecode(response.body);
+        List lista = jsonDecode(response.body);
         return lista;
       }
     }
     catch (e){
       print(e);
-      String lista = '';
+      List lista = [];
       return lista;
     }
-      String lista = '';
+      List lista = [];
       return lista;
   }
 
-  static Future<List<dynamic>> getAverageAgeByInterval(String beginningDate, String endDate) async {
+  static Future<int> getAverageAgeByInterval(String beginningDate, String endDate) async {
     try{
       var uri = ROOT+get_average_age_for_date;
       final body = {
@@ -57,15 +57,15 @@ class Services {
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
         print(lista);
-        return lista;
+        return lista[0][0];
       }
     }
     catch (e){
       print(e);
     }
-    return [];
+    return 0;
   }
-  static Future<List<dynamic>> getMostCommonTicketTypeByInterval(  String beginningDate, String endDate) async {
+  static Future<int> getMostCommonTicketTypeByInterval(  String beginningDate, String endDate) async {
     try{
       var uri = ROOT+get_most_common_ticket_type_for_interval;
       final body = {
@@ -85,15 +85,15 @@ class Services {
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
         print(lista);
-        return lista;
+        return lista[0][0];
       }
     }
     catch (e){
       print(e);
     }
-    return [];
+    return 0;
   }
-  static Future<List<dynamic>> getIngresosByInterval( String beginningDate, String endDate) async {
+  static Future<int> getIngresosByInterval( String beginningDate, String endDate) async {
     try{
       var uri = ROOT+get_ingresos_totales_for_interval;
       final body = {
@@ -113,17 +113,17 @@ class Services {
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
         print(lista);
-        return lista;
+        return lista[0][0];
       }
     }
     catch (e){
       print(e);
     }
-    return [];
+    return 0;
   }
 
 
-  static Future<List<dynamic>> getAverageAgeByDate( String date) async {
+  static Future<int> getAverageAgeByDate( String date) async {
     try{
       var uri = ROOT+get_average_age_for_date;
       final body = {
@@ -143,15 +143,15 @@ class Services {
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
         print(lista);
-        return lista;
+        return lista[0][0];
       }
     }
     catch (e){
       print(e);
     }
-    return [];
+    return 0;
   }
-  static Future<List<dynamic>> getMostCommonTicketTypeByDate( String date) async {
+  static Future<String> getMostCommonTicketTypeByDate( String date) async {
     try{
       var uri = ROOT+get_most_common_ticket_type_for_date;
       final body = {
@@ -170,15 +170,15 @@ class Services {
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
         print(lista);
-        return lista;
+        return lista[0][0];
       }
     }
     catch (e){
       print(e);
     }
-    return [];
+    return "";
   }
-  static Future<List<dynamic>> getIngresosByDate( String date) async {
+  static Future<int> getIngresosByDate( String date) async {
     try{
       var uri = ROOT+get_ingresos_totales_for_date;
       final body = {
@@ -197,13 +197,13 @@ class Services {
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
         print(lista);
-        return lista;
+        return lista[0][0];
       }
     }
     catch (e){
       print(e);
     }
-    return [];
+    return 0;
   }
 
 
@@ -214,7 +214,7 @@ class Services {
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
         print(lista);
-        return lista;
+        return lista[0];
       }
     }
     catch (e){
