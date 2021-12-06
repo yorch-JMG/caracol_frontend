@@ -3,8 +3,8 @@ import 'package:caracol_frontend/models/edadPromedio.dart';
 import 'package:caracol_frontend/models/evento.dart';
 import 'package:caracol_frontend/models/ingresos.dart';
 import 'package:caracol_frontend/models/tipoBoleto.dart';
-import 'package:caracol_frontend/models/visitante.dart';
-import 'package:caracol_frontend/models/convertDynamicToListType.dart';
+import 'package:caracol_frontend/models/datos_grafica.dart';
+import 'package:caracol_frontend/models/convert_dynamic_to_list_type.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 class Services {
@@ -22,6 +22,8 @@ class Services {
   static var get_average_age_for_interval = 'sales/getAverageAgeByInterval';
   static var get_most_common_ticket_type_for_interval = 'sales/getMostCommonTicketTypeByInterval';
   static var get_ingresos_totales_for_interval = 'sales/getIngresosByInterval';
+
+  static var get_anios_ventas_totales = 'sales/getTotalYearsAndTotalSales';
 
   static Future<List<dynamic>> getAllVisitantesList() async {
     try{
@@ -209,6 +211,21 @@ class Services {
       print(e);
     }
     return Ingresos();
+  }
+
+  static Future<List<DatosGrafica>> getAllDatosParaGraficaList() async {
+    try{
+      var uri = ROOT+get_anios_ventas_totales;
+      final response = await http.get(Uri.parse(uri)); 
+      if(200 == response.statusCode){
+        List<dynamic> lista = jsonDecode(response.body);
+        return convertToDataForGraph(lista);
+      }
+    }
+    catch (e){
+      print(e);
+    }
+    return [];
   }
 
   static Future<List<Evento>> getAllEventsList() async {
