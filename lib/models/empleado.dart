@@ -8,13 +8,13 @@ class Empleado {
   int? admin;
   String? correoElectronico;
 
-  factory Empleado.fromJson(Map<String, dynamic> json) {
-    return Empleado(json['idEmpleado'] as int, 
-                    json['nombre'] as String, 
-                    json['puesto'] as String, 
-                    json['departamento'] as String, 
-                    json['admin'] as int, 
-                    json['correoElectronico'] as String);
+  factory Empleado.fromJson(Map<String, dynamic> empleado) {
+    return Empleado(empleado["idEmpleado"], 
+                    empleado['nombre'] as String, 
+                    empleado['puesto'] as String, 
+                    empleado['departamento'] as String, 
+                    empleado['admin'] as int, 
+                    empleado['correoElectronico'] as String);
   }
 
   Empleado( int idEmpleado,  String nombre, String puesto, String departamento, int admin, String correoElectronico)

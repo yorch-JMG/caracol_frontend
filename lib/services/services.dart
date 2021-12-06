@@ -1,8 +1,10 @@
 import 'package:caracol_frontend/models/empleado.dart';
 import 'package:caracol_frontend/models/edadPromedio.dart';
+import 'package:caracol_frontend/models/evento.dart';
 import 'package:caracol_frontend/models/ingresos.dart';
 import 'package:caracol_frontend/models/tipoBoleto.dart';
 import 'package:caracol_frontend/models/visitante.dart';
+import 'package:caracol_frontend/models/convertDynamicToListType.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 class Services {
@@ -209,14 +211,13 @@ class Services {
     return Ingresos();
   }
 
-  static Future<List<dynamic>> getAllEventsList() async {
+  static Future<List<Evento>> getAllEventsList() async {
     try{
       var uri = ROOT+get_all_events;
       final response = await http.get(Uri.parse(uri)); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(lista);
-        return lista[0];
+        return convertToEventos(lista);
       }
     }
     catch (e){
@@ -225,14 +226,14 @@ class Services {
     return [];
   }
 
-  static Future<List<dynamic>> getAllEmpleadosList() async {
+  static Future<List<Empleado>> getAllEmpleadosList() async {
     try{
       var uri = ROOT+get_all_users;
       final response = await http.get(Uri.parse(uri)); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(lista);
-        return lista[0];
+
+        return convertToEmpleados(lista);
       }
     }
     catch (e){
