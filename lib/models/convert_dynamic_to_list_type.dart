@@ -1,6 +1,7 @@
 import 'package:caracol_frontend/models/empleado.dart';
 import 'package:caracol_frontend/models/evento.dart';
 import 'package:caracol_frontend/models/datos_grafica.dart';
+import 'package:caracol_frontend/models/ticketForVisitante.dart';
 
 List<Empleado> convertToEmpleados (List<dynamic> responseList){
   List<Empleado> empleados = [];
@@ -30,4 +31,10 @@ List<DatosGrafica> convertToDataForGraph (List<dynamic> responseList){
     datos.add(DatosGrafica.fromJson(arrayDatos[i])); 
   }
   return datos;
+}
+
+Ticket toTicketInfo (List<dynamic> responseList){
+  Ticket ticket = Ticket.fromJson(responseList[0]);
+  return ticket;
+
 }

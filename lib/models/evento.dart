@@ -1,5 +1,5 @@
 class Evento {
-  int? noEvento;
+  int noEvento = 0;
   String? nombre;
   String? fecha;
   int? asistentes;
@@ -12,7 +12,6 @@ class Evento {
                     evento['asistentes'] as int, 
                     evento['descripcion'] as String); 
   }
-
   Evento( int noEvento,  String nombre, String fecha, int asistentes , String descripcion)
   {
     this.noEvento = noEvento;
@@ -21,19 +20,19 @@ class Evento {
     this.asistentes = asistentes;
     this.descripcion = descripcion;
   }
-  int? getNoEvento(){
-    return noEvento != null ? this.noEvento : null;
+  int getNoEvento(){
+    return noEvento != null ? this.noEvento : 0;
   }
   String? getNombre(){
-    return nombre != null ? this.nombre : null;
+    return nombre != null ? this.nombre : "";
   }
   String? getFecha(){
-    return fecha != null ? this.fecha : null;
+    return fecha != null ? this.fecha : "";
   }
   int? getAsistentes(){
-    return asistentes != null ? this.asistentes : null;
+    return asistentes != null ? this.asistentes : 0;
   }
   String? getDescripcion(){
-    return descripcion != null ? this.descripcion : null;
+    return descripcion != null ? this.descripcion : "";
   }
 }

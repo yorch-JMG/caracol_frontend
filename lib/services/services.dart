@@ -2,6 +2,7 @@ import 'package:caracol_frontend/models/empleado.dart';
 import 'package:caracol_frontend/models/edadPromedio.dart';
 import 'package:caracol_frontend/models/evento.dart';
 import 'package:caracol_frontend/models/ingresos.dart';
+import 'package:caracol_frontend/models/ticketForVisitante.dart';
 import 'package:caracol_frontend/models/tipoBoleto.dart';
 import 'package:caracol_frontend/models/datos_grafica.dart';
 import 'package:caracol_frontend/models/convert_dynamic_to_list_type.dart';
@@ -43,8 +44,7 @@ class Services {
       List lista = [];
       return lista;
   }
-
-  static Future<EdadPromedio> getAverageAgeByInterval(String beginningDate, String endDate) async {
+static Future<EdadPromedio> getAverageAgeByInterval(String beginningDate, String endDate) async {
     try{
       var uri = ROOT+get_average_age_for_date;
       final body = {
@@ -71,6 +71,37 @@ class Services {
       print(e);
     }
     return EdadPromedio();
+  }
+  static Future<String> createSale(String nombre,
+                                   int edad,
+                                   String correoElectronico, int noEvento) async {
+    try{
+      var uri = ROOT+create_sale;
+      final body = {
+        'nombre_to_add' : nombre,
+        'edad_to_add' : edad,
+        'correo_electronico_to_add' : correoElectronico,
+        'id_evento' : noEvento
+      };
+      final headers = {
+        "accept": "application/json", 
+        "content-type": "application/json"
+      };
+      final encodedBody = jsonEncode(body);
+      final response = await http.post(
+                                    Uri.parse(uri), 
+                                    body : encodedBody,
+                                    headers: headers); 
+      if(200 == response.statusCode){
+        List<dynamic> lista = jsonDecode(response.body);
+        String result = lista[0][0]["Ticket generado."];
+        return result;
+      }
+    }
+    catch (e){
+      print(e);
+    }
+    return "";
   }
   static Future<TipoBoleto> getMostCommonTicketTypeByInterval(  String beginningDate, String endDate) async {
     try{
@@ -257,5 +288,19 @@ class Services {
       print(e);
     }
     return [];
+  }
+  static Future<Ticket> getTicketForVisitante() async {
+    try{
+      var uri = ROOT+get_ticket_for_visitante;
+      final response = await http.get(Uri.parse(uri)); 
+      if(200 == response.statusCode){
+        List<dynamic> lista = jsonDecode(response.body);
+        return toTicketInfo(lista[0]);
+      }
+    }
+    catch (e){
+      print(e);
+    }
+    return Ticket("", "", "", "",0);
   }
 }
