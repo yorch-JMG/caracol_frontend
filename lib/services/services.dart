@@ -18,7 +18,6 @@ class Services {
   static var get_most_common_ticket_type_for_interval = 'sales/getMostCommonTicketTypeByInterval';
   static var get_ingresos_totales_for_interval = 'sales/getIngresosByInterval';
 
-
   static Future<String> getAllVisitantesList() async {
     try{
       var uri = ROOT+get_all_users;
@@ -45,7 +44,15 @@ class Services {
         'beginningDate' : beginningDate,
         'endDate' : endDate
       };
-      final response = await http.post(Uri.parse(uri), body : body); 
+      final headers = {
+        "accept": "application/json", 
+        "content-type": "application/json"
+      };
+      final encodedBody = jsonEncode(body);
+      final response = await http.post(
+                                    Uri.parse(uri), 
+                                    body : encodedBody,
+                                    headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
@@ -65,7 +72,15 @@ class Services {
         'beginningDate' : beginningDate,
         'endDate' : endDate
       };
-      final response = await http.post(Uri.parse(uri), body : body); 
+      final headers = {
+        "accept": "application/json", 
+        "content-type": "application/json"
+      };
+      final encodedBody = jsonEncode(body);
+      final response = await http.post(
+                                    Uri.parse(uri), 
+                                    body : encodedBody,
+                                    headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
@@ -85,7 +100,15 @@ class Services {
         'beginningDate' : beginningDate,
         'endDate' : endDate
       };
-      final response = await http.post(Uri.parse(uri), body : body); 
+      final headers = {
+        "accept": "application/json", 
+        "content-type": "application/json"
+      };
+      final encodedBody = jsonEncode(body);
+      final response = await http.post(
+                                    Uri.parse(uri), 
+                                    body : encodedBody,
+                                    headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
@@ -104,9 +127,18 @@ class Services {
     try{
       var uri = ROOT+get_average_age_for_date;
       final body = {
-        'dateForSearch' : date
+        "dateForSearch" : date
       };
-      final response = await http.post(Uri.parse(uri), body : body); 
+      final headers = {
+        "accept": "application/json", 
+        "content-type": "application/json"
+      };
+      final encodedBody = jsonEncode(body);
+      print(body);
+      final response = await http.post(
+                                    Uri.parse(uri), 
+                                    body : encodedBody,
+                                    headers: headers ); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
@@ -125,7 +157,15 @@ class Services {
       final body = {
         'dateForSearch' : date
       };
-      final response = await http.post(Uri.parse(uri), body : body); 
+      final headers = {
+        "accept": "application/json", 
+        "content-type": "application/json"
+      };
+      final encodedBody = jsonEncode(body);
+      final response = await http.post(
+                                    Uri.parse(uri), 
+                                    body : encodedBody,
+                                    headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
@@ -144,7 +184,15 @@ class Services {
       final body = {
         'dateForSearch' : date
       };
-      final response = await http.post(Uri.parse(uri), body : body); 
+      final headers = {
+        "accept": "application/json", 
+        "content-type": "application/json"
+      };
+      final encodedBody = jsonEncode(body);
+      final response = await http.post(
+                                    Uri.parse(uri), 
+                                    body : encodedBody,
+                                    headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
