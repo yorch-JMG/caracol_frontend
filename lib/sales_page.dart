@@ -47,15 +47,15 @@ List<DatosGrafica> lista = [];
             )
         ),
         child: Scaffold(
-          backgroundColor: Colors.transparent,
           appBar: AppBar(title: const Text('Museo Caracol'),
             backgroundColor: Colors.transparent,
             elevation: 0,
      ),
-            body: Container(
+            body: SingleChildScrollView(
                 child: FutureBuilder(
                         future: getAllDatos(),
                         builder: (BuildContext context, AsyncSnapshot snapshot){
+                          print(snapshot.data);
                           if(snapshot.data != null){
                           lista = snapshot.data[1];
                            List<charts.Series<DatosGrafica, String>> series = [
