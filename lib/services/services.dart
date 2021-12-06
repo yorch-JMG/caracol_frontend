@@ -1,5 +1,10 @@
 import 'package:caracol_frontend/models/empleado.dart';
+import 'package:caracol_frontend/models/edadPromedio.dart';
+import 'package:caracol_frontend/models/evento.dart';
+import 'package:caracol_frontend/models/ingresos.dart';
+import 'package:caracol_frontend/models/tipoBoleto.dart';
 import 'package:caracol_frontend/models/visitante.dart';
+import 'package:caracol_frontend/models/convertDynamicToListType.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 class Services {
@@ -18,26 +23,26 @@ class Services {
   static var get_most_common_ticket_type_for_interval = 'sales/getMostCommonTicketTypeByInterval';
   static var get_ingresos_totales_for_interval = 'sales/getIngresosByInterval';
 
-  static Future<String> getAllVisitantesList() async {
+  static Future<List<dynamic>> getAllVisitantesList() async {
     try{
       var uri = ROOT+get_all_users;
       final response = await http.get(Uri.parse(uri)); 
       print(response);
       if(200 == response.statusCode){
-        String lista = jsonDecode(response.body);
+        List lista = jsonDecode(response.body);
         return lista;
       }
     }
     catch (e){
       print(e);
-      String lista = '';
+      List lista = [];
       return lista;
     }
-      String lista = '';
+      List lista = [];
       return lista;
   }
 
-  static Future<List<dynamic>> getAverageAgeByInterval(String beginningDate, String endDate) async {
+  static Future<int> getAverageAgeByInterval(String beginningDate, String endDate) async {
     try{
       var uri = ROOT+get_average_age_for_date;
       final body = {
@@ -57,15 +62,15 @@ class Services {
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
         print(lista);
-        return lista;
+        return lista[0][0];
       }
     }
     catch (e){
       print(e);
     }
-    return [];
+    return 0;
   }
-  static Future<List<dynamic>> getMostCommonTicketTypeByInterval(  String beginningDate, String endDate) async {
+  static Future<int> getMostCommonTicketTypeByInterval(  String beginningDate, String endDate) async {
     try{
       var uri = ROOT+get_most_common_ticket_type_for_interval;
       final body = {
@@ -85,15 +90,15 @@ class Services {
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
         print(lista);
-        return lista;
+        return lista[0][0];
       }
     }
     catch (e){
       print(e);
     }
-    return [];
+    return 0;
   }
-  static Future<List<dynamic>> getIngresosByInterval( String beginningDate, String endDate) async {
+  static Future<int> getIngresosByInterval( String beginningDate, String endDate) async {
     try{
       var uri = ROOT+get_ingresos_totales_for_interval;
       final body = {
@@ -113,17 +118,17 @@ class Services {
         List<dynamic> lista = jsonDecode(response.body);
         print(response);
         print(lista);
-        return lista;
+        return lista[0][0];
       }
     }
     catch (e){
       print(e);
     }
-    return [];
+    return 0;
   }
 
 
-  static Future<List<dynamic>> getAverageAgeByDate( String date) async {
+  static Future<EdadPromedio> getAverageAgeByDate( String date) async {
     try{
       var uri = ROOT+get_average_age_for_date;
       final body = {
@@ -134,24 +139,24 @@ class Services {
         "content-type": "application/json"
       };
       final encodedBody = jsonEncode(body);
-      print(body);
       final response = await http.post(
                                     Uri.parse(uri), 
                                     body : encodedBody,
                                     headers: headers ); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(response);
-        print(lista);
-        return lista;
+        EdadPromedio edadPromedio = EdadPromedio();
+        edadPromedio.setEdadPromedio(lista[0][0]["edadPromedio"]);
+        print(edadPromedio.edadPromedio);
+        return edadPromedio;
       }
     }
     catch (e){
       print(e);
     }
-    return [];
+    return EdadPromedio();
   }
-  static Future<List<dynamic>> getMostCommonTicketTypeByDate( String date) async {
+  static Future<TipoBoleto> getMostCommonTicketTypeByDate( String date) async {
     try{
       var uri = ROOT+get_most_common_ticket_type_for_date;
       final body = {
@@ -168,17 +173,17 @@ class Services {
                                     headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(response);
-        print(lista);
-        return lista;
+        TipoBoleto tipoBoleto = TipoBoleto();
+        tipoBoleto.setDatosTipoBoleto(lista[0][0]["tipoBoletoMasComun"], lista[0][0]["numeroDeBoletos"]);
+        return tipoBoleto;
       }
     }
     catch (e){
       print(e);
     }
-    return [];
+    return TipoBoleto();
   }
-  static Future<List<dynamic>> getIngresosByDate( String date) async {
+  static Future<Ingresos> getIngresosByDate( String date) async {
     try{
       var uri = ROOT+get_ingresos_totales_for_date;
       final body = {
@@ -195,9 +200,24 @@ class Services {
                                     headers: headers); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(response);
-        print(lista);
-        return lista;
+        Ingresos ingresos = Ingresos();
+        ingresos.setIngresos(lista[0][0]["ingresos"]);
+        return ingresos;
+      }
+    }
+    catch (e){
+      print(e);
+    }
+    return Ingresos();
+  }
+
+  static Future<List<Evento>> getAllEventsList() async {
+    try{
+      var uri = ROOT+get_all_events;
+      final response = await http.get(Uri.parse(uri)); 
+      if(200 == response.statusCode){
+        List<dynamic> lista = jsonDecode(response.body);
+        return convertToEventos(lista);
       }
     }
     catch (e){
@@ -206,15 +226,14 @@ class Services {
     return [];
   }
 
-
-  static Future<List<dynamic>> getAllEmpleadosList() async {
+  static Future<List<Empleado>> getAllEmpleadosList() async {
     try{
       var uri = ROOT+get_all_users;
       final response = await http.get(Uri.parse(uri)); 
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
-        print(lista);
-        return lista;
+
+        return convertToEmpleados(lista);
       }
     }
     catch (e){
