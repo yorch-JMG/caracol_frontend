@@ -40,7 +40,10 @@ class _EventosClientesPageState extends State<EventosClientesPage> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-            body: Container(
+            body: Padding(
+                padding: EdgeInsets.fromLTRB(19, 29, 19, 0),
+                child: 
+            Container(
                 child: FutureBuilder(
               future: getEventos(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -48,14 +51,16 @@ class _EventosClientesPageState extends State<EventosClientesPage> {
                   return ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                          elevation:5,
-                          color: Colors.grey,
+                        return Padding(
+                            padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
+                            child: 
+                            Card(
+                          elevation: 10,
+                          color: Colors.white,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           child: InkWell(
                             splashColor: Colors.blue.withAlpha(30),
                             onTap: () {
-                              Text(snapshot.data[index].noEvento, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30,), textAlign: TextAlign.center,);
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => EventoClientePage(
                                       data: snapshot.data[index])));
@@ -63,10 +68,16 @@ class _EventosClientesPageState extends State<EventosClientesPage> {
                             child: SizedBox(
                               width: 200,
                               height: 100,
-                              child: Text(snapshot.data[index].nombre),
-                            ),
+                              child: Padding(
+                                padding: EdgeInsets.all(35),
+                                child: 
+                                  Text(snapshot.data[index].nombre,
+                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,), textAlign: TextAlign.center,),
+                              )                             ),
                           ),
+                        )
                         );
+
                       });
                 } else {
                   return Container(
@@ -74,11 +85,12 @@ class _EventosClientesPageState extends State<EventosClientesPage> {
                       child: Text("Cargando..."),
                     ),
                   );
+
                 }
               },
             )),
           )),
       //const MyStatefulWidget()),
-    );
+    ));
   }
 }
