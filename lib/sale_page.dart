@@ -116,9 +116,6 @@ class SalePage extends StatefulWidget {
                                                           ),
                                                         ),
                                                   ),
-                                              SizedBox(
-                                                  height: registerPageProps.verticalSpacing,
-                                              ),
                                             ],
                                         ),
                                   ),
