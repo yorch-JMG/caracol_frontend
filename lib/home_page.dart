@@ -1,4 +1,5 @@
 import 'package:caracol_frontend/eventos_page.dart';
+import 'package:caracol_frontend/sales_page.dart';
 import 'package:caracol_frontend/services/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +41,56 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(title: const Text('Museo Caracol'),
             backgroundColor: Colors.transparent,
             elevation: 0,
-     ),
-            body: Container(
+            ),
+          drawer: Drawer(
+              child: Container(
+                  color: Colors.indigo,
+                  child: ListView(
+      padding: EdgeInsets.zero,
+      children: const <Widget>[
+        DrawerHeader(
+          decoration: BoxDecoration(
+            color: Colors.indigo,
+          ),
+          child: Text(
+            'Menu',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+            ),
+          ),
+        ),
+        ListTile(
+          leading: Icon(Icons.message,
+              color: Colors.white,),
+          title: Text(
+              'Messages',
+              style: TextStyle(
+                  color: Colors.white
+              ),),
+           
+        ),
+        ListTile(
+          leading: Icon(
+              Icons.account_circle,
+              color: Colors.white,),
+          title: Text('Profile',
+              style: TextStyle(
+                  color: Colors.white
+              ),),
+        ),
+        ListTile(
+          leading: Icon(Icons.settings,
+              color: Colors.white,),
+          title: Text('Settings',
+              style: TextStyle(
+                  color: Colors.white
+              ),),
+        ),
+      ],
+    )),
+ 
+              ),             body: Container(
                 child:Column(
                   children: <Widget>[
                     Image.asset('images/logo.png', width:300),
@@ -71,7 +120,12 @@ class _HomePageState extends State<HomePage> {
                         children: <Widget>[
                           ElevatedButton(
                             style: style,
-                              onPressed: (){},
+                            onPressed: (){
+                            Navigator.of(context)
+                                     .push(
+                                        MaterialPageRoute(builder: (context) => SalesPage()
+                                      ));
+                            },
                               child: const Text('Stats')
                           ),
                           const SizedBox(height: 00),
@@ -86,6 +140,7 @@ class _HomePageState extends State<HomePage> {
                     )
                 ],
                 ),
+                
           )
         ),
       ),//const MyStatefulWidget()),
