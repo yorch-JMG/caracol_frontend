@@ -49,6 +49,9 @@ class _EventosClientesPageState extends State<EventosClientesPage> {
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Card(
+                          elevation:5,
+                          color: Colors.grey,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           child: InkWell(
                             splashColor: Colors.blue.withAlpha(30),
                             onTap: () {
