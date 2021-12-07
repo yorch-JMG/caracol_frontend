@@ -61,28 +61,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.message,
+          leading: Icon(Icons.exit_to_app,
               color: Colors.white,),
-          title: Text(
-              'Messages',
-              style: TextStyle(
-                  color: Colors.white
-              ),),
-           
-        ),
-        ListTile(
-          leading: Icon(
-              Icons.account_circle,
-              color: Colors.white,),
-          title: Text('Profile',
-              style: TextStyle(
-                  color: Colors.white
-              ),),
-        ),
-        ListTile(
-          leading: Icon(Icons.settings,
-              color: Colors.white,),
-          title: Text('Settings',
+          title: Text('Salir',
               style: TextStyle(
                   color: Colors.white
               ),),
@@ -91,12 +72,21 @@ class _HomePageState extends State<HomePage> {
     )),
  
               ),             body: Container(
-                child:Column(
-                  children: <Widget>[
+              child:
+                Column(
+                  
+                  children: [
                     Image.asset('images/logo.png', width:300),
+                    Padding(
+                        padding: const EdgeInsets.all(80),
+                        child: Column(
+                            children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: 
                       ElevatedButton(
                         style: style,
                         onPressed: (){
@@ -107,17 +97,14 @@ class _HomePageState extends State<HomePage> {
                           },
                           child: const Text('Eventos')
                       ),
-                      const SizedBox(height: 200),
-                      ElevatedButton(
-                        style: style,
-                        onPressed: () {},
-                        child: const Text('Comprar boletos'),
-                      ),
+
+                              
+                            )
                       ]
                     ),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
+                        children: [
                           ElevatedButton(
                             style: style,
                             onPressed: (){
@@ -128,18 +115,16 @@ class _HomePageState extends State<HomePage> {
                             },
                               child: const Text('Stats')
                           ),
-                          const SizedBox(height: 00),
-                          ElevatedButton(
-                            style: style,
-                            onPressed: () {
-                              getData();
-                            },
-                            child: const Text('?'),
-                          ),
                         ]
                     )
+
+                            ],
+                        ),
+                        )
                 ],
                 ),
+
+                
                 
           )
         ),

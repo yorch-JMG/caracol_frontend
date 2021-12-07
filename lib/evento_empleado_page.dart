@@ -5,11 +5,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class EventoEmpleadoPage extends StatelessWidget {
+class EventoEmpleadoPage extends StatefulWidget {
   final Evento data;
-  const EventoEmpleadoPage({Key? key,
+  EventoEmpleadoPage({Key? key,
                   required this.data,
   }) : super(key: key);
+  @override
+  _EventoEmpleadoPageState createState() => _EventoEmpleadoPageState();
+}
+
+
+  class _EventoEmpleadoPageState extends State<EventoEmpleadoPage> {
   
   Future<List<Material1>> listaMateriales(int idEvento) async{
   var getAllMaterialesList = await Services.getMaterialesPorEvento(idEvento);
@@ -22,16 +28,17 @@ class EventoEmpleadoPage extends StatelessWidget {
     print(await eliminarMaterial);
     return eliminarMaterial;
   }
+
   @override
   Widget build(BuildContext context) {
-    if(data.nombre != null){
+    if(widget.data.nombre != null){
       return Scaffold(
           appBar: AppBar(
-              title: Text(data.nombre.toString()),
+              title: Text(widget.data.nombre.toString()),
         ),
         body: Container(
             child: FutureBuilder(
-                future: listaMateriales(data.noEvento),
+                future: listaMateriales(widget.data.noEvento),
                         builder: (BuildContext context, AsyncSnapshot snapshot){
                           if(snapshot.data != null){
                             return ListView.builder( itemCount: snapshot.data.length,
@@ -60,6 +67,7 @@ class EventoEmpleadoPage extends StatelessWidget {
                                                                   ElevatedButton(onPressed: 
                                                                       () =>{
                                                                         eliminarMaterial(snapshot.data[index].idMaterial)
+                                                                            ,setState(() {})
                                                                       }, child: Text("Eliminar material."))
                                                                 ],
                                                             ) 
@@ -91,3 +99,4 @@ class EventoEmpleadoPage extends StatelessWidget {
     }
   }
 }
+
