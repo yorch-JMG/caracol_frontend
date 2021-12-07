@@ -10,7 +10,7 @@ import 'package:caracol_frontend/models/convert_dynamic_to_list_type.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 class Services {
-  static var ROOT = 'http://192.168.0.255:3000/';
+  static var ROOT = 'http://192.168.0.10:3000/';
   static var get_all_users = 'users';
   static var get_user_by_id = 'users/getUserById';
   static var login = 'login';
