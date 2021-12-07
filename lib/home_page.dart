@@ -1,4 +1,5 @@
 import 'package:caracol_frontend/eventos_page.dart';
+import 'package:caracol_frontend/sales_page.dart';
 import 'package:caracol_frontend/services/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,14 +41,52 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(title: const Text('Museo Caracol'),
             backgroundColor: Colors.transparent,
             elevation: 0,
-     ),
-            body: Container(
-                child:Column(
-                  children: <Widget>[
+            ),
+          drawer: Drawer(
+              child: Container(
+                  color: Colors.indigo,
+                  child: ListView(
+      padding: EdgeInsets.zero,
+      children: const <Widget>[
+        DrawerHeader(
+          decoration: BoxDecoration(
+            color: Colors.indigo,
+          ),
+          child: Text(
+            'Menu',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+            ),
+          ),
+        ),
+        ListTile(
+          leading: Icon(Icons.exit_to_app,
+              color: Colors.white,),
+          title: Text('Salir',
+              style: TextStyle(
+                  color: Colors.white
+              ),),
+        ),
+      ],
+    )),
+ 
+              ),             body: Container(
+              child:
+                Column(
+                  
+                  children: [
                     Image.asset('images/logo.png', width:300),
+                    Padding(
+                        padding: const EdgeInsets.all(80),
+                        child: Column(
+                            children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: 
                       ElevatedButton(
                         style: style,
                         onPressed: (){
@@ -58,34 +97,35 @@ class _HomePageState extends State<HomePage> {
                           },
                           child: const Text('Eventos')
                       ),
-                      const SizedBox(height: 200),
-                      ElevatedButton(
-                        style: style,
-                        onPressed: () {},
-                        child: const Text('Comprar boletos'),
-                      ),
+
+                              
+                            )
                       ]
                     ),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
+                        children: [
                           ElevatedButton(
                             style: style,
-                              onPressed: (){},
-                              child: const Text('Stats')
-                          ),
-                          const SizedBox(height: 00),
-                          ElevatedButton(
-                            style: style,
-                            onPressed: () {
-                              getData();
+                            onPressed: (){
+                            Navigator.of(context)
+                                     .push(
+                                        MaterialPageRoute(builder: (context) => SalesPage()
+                                      ));
                             },
-                            child: const Text('?'),
+                              child: const Text('Stats')
                           ),
                         ]
                     )
+
+                            ],
+                        ),
+                        )
                 ],
                 ),
+
+                
+                
           )
         ),
       ),//const MyStatefulWidget()),

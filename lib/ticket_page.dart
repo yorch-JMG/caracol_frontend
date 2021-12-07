@@ -19,15 +19,38 @@ class TicketPage extends StatelessWidget {
         initialData: "Cargando...",
         builder: (BuildContext context, AsyncSnapshot snapshot){
           print(snapshot.data.getNombreEvento());
+          if(snapshot.data != null){
           return Scaffold(
-              body: SingleChildScrollView(
-                  child: QrImage(
-                        data: snapshot.data.nombreEvento,
+              body: Container(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                   QrImage(
+                        data: snapshot.data.precio.toString(),
                         version: QrVersions.auto,
                         size: 230.0,)
+
+                            ],
+                        )
+
+
+                      ],
+                  )
               )  
               
           );
+
+          }
+          else{
+            return Scaffold(
+                body: Container(
+                    child: Text("Cargando..."),
+                ),
+            );
+          }
 
         });
   }

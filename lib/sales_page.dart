@@ -83,7 +83,7 @@ List<DatosGrafica> lista = [];
                                                           print(snapshot.data[0][index].noEvento);
                                                           Navigator.of(context)
                                                               .push(
-                                                                  MaterialPageRoute(builder: (context) => EventoEmpleadoPage(data: snapshot.data[index])
+                                                                  MaterialPageRoute(builder: (context) => EventoEmpleadoPage(data: snapshot.data[0][index])
                                                                     ));
                                                               
 

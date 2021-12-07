@@ -5,15 +5,17 @@ import 'package:caracol_frontend/home_page.dart';
 class OnBoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SafeArea(
+      
       child: IntroductionScreen(
           pages: [
             PageViewModel(
                 title: "Descubre",
-                body: "dsdnjdkndjnknkj"
+                body: "",
+                
             ),
             PageViewModel(
-                title: "Descubre",
-                body: "dsdnjdkndjnknkj"
+                title: "Explora",
+                body: ""
             )
           ],
           done: Text('Saltar'),

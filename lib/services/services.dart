@@ -2,6 +2,7 @@ import 'package:caracol_frontend/models/empleado.dart';
 import 'package:caracol_frontend/models/edadPromedio.dart';
 import 'package:caracol_frontend/models/evento.dart';
 import 'package:caracol_frontend/models/ingresos.dart';
+import 'package:caracol_frontend/models/material.dart';
 import 'package:caracol_frontend/models/ticketForVisitante.dart';
 import 'package:caracol_frontend/models/tipoBoleto.dart';
 import 'package:caracol_frontend/models/datos_grafica.dart';
@@ -9,7 +10,7 @@ import 'package:caracol_frontend/models/convert_dynamic_to_list_type.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 class Services {
-  static var ROOT = 'http://192.168.1.67:3000/';
+  static var ROOT = 'http://192.168.0.10:3000/';
   static var get_all_users = 'users';
   static var get_user_by_id = 'users/getUserById';
   static var login = 'login';
@@ -19,7 +20,9 @@ class Services {
   static var get_average_age_for_date = 'sales/getAverageAgeByDate';
   static var get_most_common_ticket_type_for_date = 'sales/getMostCommonTicketTypeByDate';
   static var get_ingresos_totales_for_date = 'sales/getIngresosByDate';
-  
+  static var get_materiales = 'events/materialesPorEvento';
+  static var create_material = 'events/agregarMaterial';
+  static var delete_material = 'events/deleteMaterial';
   static var get_average_age_for_interval = 'sales/getAverageAgeByInterval';
   static var get_most_common_ticket_type_for_interval = 'sales/getMostCommonTicketTypeByInterval';
   static var get_ingresos_totales_for_interval = 'sales/getIngresosByInterval';
@@ -51,7 +54,7 @@ static Future<EdadPromedio> getAverageAgeByInterval(String beginningDate, String
         'beginningDate' : beginningDate,
         'endDate' : endDate
       };
-      final headers = {
+      final headers = { 
         "accept": "application/json", 
         "content-type": "application/json"
       };
@@ -71,6 +74,61 @@ static Future<EdadPromedio> getAverageAgeByInterval(String beginningDate, String
       print(e);
     }
     return EdadPromedio();
+  }
+  static Future<String> deleteMaterial(int idMaterial) async {
+    try{
+      var uri = ROOT+delete_material;
+      final body = {
+        'idMaterial' : idMaterial,
+      };
+      final headers = {
+        "accept": "application/json", 
+        "content-type": "application/json"
+      };
+      final encodedBody = jsonEncode(body);
+      final response = await http.post(
+                                    Uri.parse(uri), 
+                                    body : encodedBody,
+                                    headers: headers); 
+      if(200 == response.statusCode){
+        List<dynamic> lista = jsonDecode(response.body);
+        String result = lista[0][0]["Material agregado."];
+        return result;
+      }
+    }
+    catch (e){
+      print(e);
+    }
+    return "";
+  }
+  static Future<String> createMaterial(int noEvento, String nombre, String tipo, int cantidad) async {
+    try{
+      var uri = ROOT+create_material;
+      final body = {
+        'idEvento' : noEvento,
+        'nombre' : nombre,
+        'tipo' : tipo,
+        'cantidad' : cantidad
+      };
+      final headers = {
+        "accept": "application/json", 
+        "content-type": "application/json"
+      };
+      final encodedBody = jsonEncode(body);
+      final response = await http.post(
+                                    Uri.parse(uri), 
+                                    body : encodedBody,
+                                    headers: headers); 
+      if(200 == response.statusCode){
+        List<dynamic> lista = jsonDecode(response.body);
+        String result = lista[0][0]["Material agregado."];
+        return result;
+      }
+    }
+    catch (e){
+      print(e);
+    }
+    return "";
   }
   static Future<String> createSale(String nombre,
                                    int edad,
@@ -216,6 +274,31 @@ static Future<EdadPromedio> getAverageAgeByInterval(String beginningDate, String
     }
     return TipoBoleto();
   }
+  static Future<List<Material1>> getMaterialesPorEvento(int noEvento) async {
+    try{
+      var uri = ROOT+get_materiales;
+      final body = {
+        'idEvento' : noEvento
+      };
+      final headers = {
+        "accept": "application/json", 
+        "content-type": "application/json"
+      };
+      final encodedBody = jsonEncode(body);
+      final response = await http.post(
+                                    Uri.parse(uri), 
+                                    body : encodedBody,
+                                    headers: headers); 
+      if(200 == response.statusCode){
+        List<dynamic> lista = jsonDecode(response.body);
+        return convertToMateriales(lista);
+      }
+    }
+    catch (e){
+      print(e);
+    }
+    return [];
+  }
   static Future<Ingresos> getIngresosByDate( String date) async {
     try{
       var uri = ROOT+get_ingresos_totales_for_date;
@@ -248,6 +331,7 @@ static Future<EdadPromedio> getAverageAgeByInterval(String beginningDate, String
     try{
       var uri = ROOT+get_anios_ventas_totales;
       final response = await http.get(Uri.parse(uri)); 
+      print(response);
       if(200 == response.statusCode){
         List<dynamic> lista = jsonDecode(response.body);
         return convertToDataForGraph(lista);
@@ -289,6 +373,9 @@ static Future<EdadPromedio> getAverageAgeByInterval(String beginningDate, String
     }
     return [];
   }
+
+  
+
   static Future<Ticket> getTicketForVisitante() async {
     try{
       var uri = ROOT+get_ticket_for_visitante;

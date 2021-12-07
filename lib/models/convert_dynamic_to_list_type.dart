@@ -1,6 +1,7 @@
 import 'package:caracol_frontend/models/empleado.dart';
 import 'package:caracol_frontend/models/evento.dart';
 import 'package:caracol_frontend/models/datos_grafica.dart';
+import 'package:caracol_frontend/models/material.dart';
 import 'package:caracol_frontend/models/ticketForVisitante.dart';
 
 List<Empleado> convertToEmpleados (List<dynamic> responseList){
@@ -37,4 +38,13 @@ Ticket toTicketInfo (List<dynamic> responseList){
   Ticket ticket = Ticket.fromJson(responseList[0]);
   return ticket;
 
+}
+List<Material1> convertToMateriales (List<dynamic> responseList){
+  List<Material1> datos = [];
+  List<dynamic> arrayDatos = responseList[0];
+  print(arrayDatos);
+  for(int i = 0; i < arrayDatos.length; i++){
+    datos.add(Material1.fromJson(arrayDatos[i])); 
+  }
+  return datos;
 }

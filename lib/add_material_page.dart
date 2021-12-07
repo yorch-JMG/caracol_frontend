@@ -8,19 +8,11 @@ import 'package:flutter/material.dart';
 
 
 
-class SalePage extends StatefulWidget {
+class AddMaterialPage extends StatefulWidget {
 
-  final int noEvento;
-  SalePage({Key? key,
-                  required this.noEvento,
-  }) : super(key: key);
 
-  @override
-  _SalePageState createState() => _SalePageState();
 
-}
-
-  class _SalePageState extends State<SalePage> {
+  class _SalePageState extends StatelessWidget {
     final RegisterPageConsts registerPageProps = RegisterPageConsts();
     final _nombre = TextEditingController();
     final _correoElectronico = TextEditingController();
@@ -116,6 +108,9 @@ class SalePage extends StatefulWidget {
                                                           ),
                                                         ),
                                                   ),
+                                              SizedBox(
+                                                  height: registerPageProps.verticalSpacing,
+                                              ),
                                             ],
                                         ),
                                   ),
