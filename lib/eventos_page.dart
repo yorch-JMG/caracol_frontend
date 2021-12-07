@@ -55,7 +55,7 @@ class _EventosClientesPageState extends State<EventosClientesPage> {
                           child: InkWell(
                             splashColor: Colors.blue.withAlpha(30),
                             onTap: () {
-                              Text(snapshot.data[index].noEvento, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20));
+                              Text(snapshot.data[index].noEvento, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30,), textAlign: TextAlign.center,);
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => EventoClientePage(
                                       data: snapshot.data[index])));
